@@ -22,7 +22,7 @@ app.use(express.static('/app'));
  */
 app.get('/', function(req, res) {res.send({api: apiName, status: 'running'});});
 app.post('/releases', function(req, res) {
-  postRelease.do(req.body).then(function(result) {res.status(200).send(result);});
+  postRelease.do(req.body).then(function(result) {res.status(200).send(result);}, function(result) {res.status(500).send(result)});
 });
 
 app.listen(8080, function() {
