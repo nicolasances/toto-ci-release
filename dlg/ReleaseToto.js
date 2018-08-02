@@ -14,7 +14,7 @@ exports.do = function(data) {
     downloadCode.do(data.microservice).then(function() {
 
       // 2. Create the configuration file
-      createConfig.do(data).then(function(
+      createConfig.do(data).then(function() {
 
         // 3. Build docker image
         buildDockerImage.do(data).then(function() {
@@ -33,7 +33,7 @@ exports.do = function(data) {
 
         }, failure);
 
-      ), failure);
+      }, failure);
 
     }, failure);
 
