@@ -1,7 +1,10 @@
 var exec = require('child_process').exec;
-var fs = require('fs');
 
 var downloadCode = require('./DownloadMSCode');
+var createConfig = require('./WriteTotoConfig');
+var buildDockerImage = require('./DockerImageBuild');
+var pushDockerImage = require('./DockerImagePush');
+var runDockerImage = require('./DockerImageRun');
 
 exports.do = function(data) {
 
@@ -10,35 +13,27 @@ exports.do = function(data) {
     // 1. Retrieve microservice from GitHub
     downloadCode.do(data.microservice).then(function() {
 
-      console.log('[' + data.microservice + '] - Creating config.js file...');
-
-      var protocol = data.ssl ? 'https' : 'http';
-      var port = data.ssl ? '443' : '80';
-      var host = data.host;
-
       // 2. Create the configuration file
-      var data = '';
+      createConfig.do(data).then(function(
 
-      data += 'var microservicesProtocol = "' + protocol + '"; \r\n';
-      data += 'var microservicesHost = "' + host + '"; \r\n';
-      data += 'var microservicesPort = "' + port + '"; \r\n';
-      data += 'var microservicesUrl = "' + host + '"; \r\n';
-      data += 'var microservicesUrl2 = "' + host + '"; \r\n';
+        // 3. Build docker image
+        buildDockerImage.do(data).then(function() {
 
-      // Write
-      fs.writeFile('/' + data.microservice + '/toto/conf/config.js', data, function(err, data) {
+          // 4. Push docker image to dockerhub
+          pushDockerImage.do(data).then(function() {
 
-        if (err) {
-          console.log('[' + data.microservice + '] - Error creating the config.js file!');
-          failure(err);
-          return;
-        }
+            // 5. Run docker image
+            runDockerImage.do(data).then(function() {
 
-        console.log('[' + data.microservice + '] - config.js file created!');
+              success({microservice: data.microservice, deployed: true});
 
-        success();
+            }, failure);
 
-      });
+          }, failure);
+
+        }, failure);
+
+      ), failure);
 
     }, failure);
 
