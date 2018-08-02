@@ -20,7 +20,7 @@ exports.do = function(conf) {
 
     // 2. Check what type of microservice it is
     // If it's the toto webapp (toto)
-    if (conf.microservice == 'toto') {releaseToto.do(conf).then(success);}
+    if (conf.microservice == 'toto') {releaseToto.do(conf).then(success, failure);}
 
     // TODO: if it's a web application (generic toto-ui-)
     else if (conf.microservice.startsWith('toto-ui-')) {failure({error: 'Not implemented'});}
