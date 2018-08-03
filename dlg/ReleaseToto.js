@@ -19,7 +19,8 @@ exports.do = function(data) {
       console.log('asd');
 
       // 2. Create the configuration file
-      createConfig.do(data).then(function() {
+      var p = createConfig.do(data);
+      p.then(function() {
 
         console.log('asd');
 
@@ -42,7 +43,10 @@ exports.do = function(data) {
 
         }, failure);
 
-      }, failure);
+      }, , function() {
+        console.log('Something happened...');
+        failure();
+      });
 
     }, function() {
       console.log('Something happened...');
