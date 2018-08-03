@@ -22,7 +22,7 @@ exports.do = function(data) {
     }).then(() => {
 
       // 3. Build docker image
-      return buildDockerImage.do(data);
+      return buildDockerImage.do(data, true);
 
     }).then(() => {
 

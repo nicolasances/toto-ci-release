@@ -1,12 +1,20 @@
 var exec = require('child_process').exec;
 
-exports.do = function(data) {
+// The nested parameter (true or false or null) is there to specify whether
+// the microservice on github has a nested folder under the root ... old microservices
+exports.do = function(data, nested) {
 
   return new Promise(function(success, failure) {
 
     console.log("[" + data.microservice + "] - Building Docker image... ");
 
-    var command = 'docker build -t nicolasances/' + data.microservice + ' /' + data.microservice;
+    // Where is the docker file?
+    var dockerFileFolder = '/' + data.microservice;
+
+    // Is the microservice folder structure normal or nested?
+    if (nested) dockerFileFolder += '/' + data.microservice;
+
+    var command = 'docker build -t nicolasances/' + data.microservice + ' ' + dockerFileFolder;
 
     exec(command, function(err) {
 
