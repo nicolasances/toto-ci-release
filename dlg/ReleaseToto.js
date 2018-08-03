@@ -21,8 +21,6 @@ exports.do = function(data) {
 
     }).then(() => {
 
-      console.log(data);
-
       // 3. Build docker image
       return buildDockerImage.do(data);
 

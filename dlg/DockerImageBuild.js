@@ -6,7 +6,7 @@ exports.do = function(data) {
 
     console.log("[" + data.microservice + "] - Building Docker image... ");
 
-    var command = 'docker build -t nicolasances/' + data.microservice + ' .';
+    var command = 'docker build -t nicolasances/' + data.microservice + ' /' + data.microservice;
 
     exec(command, function(err) {
 
