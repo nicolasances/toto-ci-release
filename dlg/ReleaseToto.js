@@ -43,8 +43,9 @@ exports.do = function(data) {
 
         }, failure);
 
-      }, function() {
+      }, function(a) {
         console.log('Something happened...');
+        console.log(a);
         failure();
       });
 
