@@ -10,18 +10,16 @@ exports.do = function(data) {
 
   return new Promise(function(success, failure) {
 
-    var config = data;
-
     console.log("Starting release of Toto Webapp...");
     console.log("Payload: " + JSON.stringify(data));
 
     // 1. Retrieve microservice from GitHub
-    downloadCode.do(config).then(() => {
+    downloadCode.do(data).then((data) => {
 
-      console.log(config);
+      console.log(data);
 
       // 2. Create the configuration file
-      return createConfig.do(config);
+      return createConfig.do(data);
 
     }).then(() => {
 
