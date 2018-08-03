@@ -43,7 +43,7 @@ exports.do = function(data) {
 
         }, failure);
 
-      }, , function() {
+      }, function() {
         console.log('Something happened...');
         failure();
       });
