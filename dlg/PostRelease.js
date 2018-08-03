@@ -12,9 +12,10 @@ exports.do = function(conf) {
     // 1. Validate input
     // Must contain host
     if (conf.host == null) {failure({error: 'No <host> parameter passed in the body'}); return;}
-
     // Must contain microservice
     if (conf.microservice == null) {failure({error: 'No <microservice> parameter passed in the body'}); return;}
+    // Must contain Dockerhub credentials
+    if (conf.dockerhubUser == null || conf.dockerhubPwd == null) {failure({error: 'No dockerhubUser and dockerhubPwd passed!'}); return;}
 
     console.log('Starting release process for Microservice ' + conf.microservice);
 

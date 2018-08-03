@@ -6,7 +6,11 @@ exports.do = function(data) {
 
     console.log("[" + data.microservice + "] - Pushing Docker image... ");
 
-    var command = 'docker push nicolasances/' + data.microservice;
+    // Login
+    command += 'docker login -u ' + data.dockerhubUser + ' -p ' + data.dockerhubPwd + ' ;';
+
+    // Push
+    command += 'docker push ' + data.dockerhubUser + '/' + data.microservice;
 
     exec(command, function(err) {
 
