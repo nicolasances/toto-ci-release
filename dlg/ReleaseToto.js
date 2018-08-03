@@ -16,12 +16,12 @@ exports.do = function(data) {
     // 1. Retrieve microservice from GitHub
     downloadCode.do(data).then((data) => {
 
-      console.log(data);
-
       // 2. Create the configuration file
       return createConfig.do(data);
 
     }).then(() => {
+
+      console.log(data);
 
       // 3. Build docker image
       return buildDockerImage.do(data);
