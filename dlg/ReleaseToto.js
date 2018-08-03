@@ -14,7 +14,7 @@ exports.do = function(data) {
     console.log("Payload: " + JSON.stringify(data));
 
     // 1. Retrieve microservice from GitHub
-    downloadCode.do(data.microservice).then(() => {
+    downloadCode.do(data).then(data => {
 
       console.log(data);
 
