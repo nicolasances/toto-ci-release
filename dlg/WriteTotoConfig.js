@@ -4,7 +4,9 @@ exports.do = function(data) {
 
   console.log('[' + data.microservice + '] - Creating config.js file...');
 
-  return new Promise(function(success, failure, data) {
+  return new Promise(function(success, failure) {
+
+    console.log(data);
 
     // 1. Retrieve microservice from GitHub
     console.log('[' + data.microservice + '] - Creating config.js file...');
