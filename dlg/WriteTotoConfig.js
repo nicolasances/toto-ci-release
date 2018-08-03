@@ -21,7 +21,7 @@ exports.do = function(data) {
     file += 'var microservicesUrl2 = "' + host + '"; \r\n';
 
     // Write
-    fs.writeFile('/' + config.microservice + '/toto/conf/config.js', file, function(err, res) {
+    fs.writeFile('/' + data.microservice + '/toto/conf/config.js', file, function(err, res) {
 
       if (err) {
         console.log('[' + data.microservice + '] - Error creating the config.js file!');
