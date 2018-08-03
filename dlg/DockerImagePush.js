@@ -7,7 +7,7 @@ exports.do = function(data) {
     console.log("[" + data.microservice + "] - Pushing Docker image... ");
 
     // Login
-    command += 'docker login -u ' + data.dockerhubUser + ' -p ' + data.dockerhubPwd + ' ;';
+    var command = 'docker login -u ' + data.dockerhubUser + ' -p ' + data.dockerhubPwd + ' ;';
 
     // Push
     command += 'docker push ' + data.dockerhubUser + '/' + data.microservice;
