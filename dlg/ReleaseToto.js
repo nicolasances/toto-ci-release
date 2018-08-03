@@ -14,44 +14,32 @@ exports.do = function(data) {
     console.log("Payload: " + JSON.stringify(data));
 
     // 1. Retrieve microservice from GitHub
-    downloadCode.do(data.microservice).then(function() {
+    downloadCode.do(data.microservice).then(() => {
 
-      console.log('asd');
+      console.log(data);
 
       // 2. Create the configuration file
-      var p = createConfig.do(data);
-      p.then(function() {
+      return createConfig.do(data);
 
-        console.log('asd');
+    }).then(() => {
 
-        // 3. Build docker image
-        buildDockerImage.do(data).then(function() {
+      // 3. Build docker image
+      return buildDockerImage.do(data);
 
-          console.log('asd2');
+    }).then(() => {
 
-          // 4. Push docker image to dockerhub
-          pushDockerImage.do(data).then(function() {
+      // 4. Push docker image to dockerhub
+      return pushDockerImage.do(data);
 
-            // 5. Run docker image
-            runDockerImage.do(data).then(function() {
+    }).then(() => {
 
-              success({microservice: data.microservice, deployed: true});
+      // 5. Run docker image
+      return runDockerImage.do(data);
 
-            }, failure);
+    }).then(() => {
 
-          }, failure);
+      success({microservice: data.microservice, deployed: true});
 
-        }, failure);
-
-      }, function(a) {
-        console.log('Something happened...');
-        console.log(a);
-        failure();
-      });
-
-    }, function() {
-      console.log('Something happened...');
-      failure();
     });
 
   });
