@@ -8,13 +8,11 @@ var runDockerImage = require('./DockerImageRun');
 
 exports.do = function(data) {
 
-  return new Promise(function(success, failure) {
-
     console.log("Starting release of Toto Webapp...");
     console.log("Payload: " + JSON.stringify(data));
 
     // 1. Retrieve microservice from GitHub
-    downloadCode.do(data).then((data) => {
+    return downloadCode.do(data).then((data) => {
 
       console.log(data);
 
@@ -36,11 +34,6 @@ exports.do = function(data) {
       // 5. Run docker image
       return runDockerImage.do(data);
 
-    }).then(() => {
-
-      success({microservice: data.microservice, deployed: true});
-
     });
 
-  });
 }
