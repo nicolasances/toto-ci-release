@@ -16,6 +16,8 @@ exports.do = function(data) {
     // 1. Retrieve microservice from GitHub
     downloadCode.do(data.microservice).then(function() {
 
+      console.log('asd');
+
       // 2. Create the configuration file
       createConfig.do(data).then(function() {
 
