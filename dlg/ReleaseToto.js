@@ -38,7 +38,10 @@ exports.do = function(data) {
 
       }, failure);
 
-    }, failure);
+    }, function() {
+      console.log('Something happened...');
+      failure();
+    });
 
   });
 }
