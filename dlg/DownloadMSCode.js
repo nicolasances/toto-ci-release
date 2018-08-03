@@ -4,9 +4,16 @@ exports.do = function(repositoryName) {
 
   return new Promise(function(success, failure) {
 
-    var command = 'git clone https://github.com/nicolasances/' + repositoryName + ' /' + repositoryName + '; ';
-
     console.log("[" + repositoryName + "] - Getting code from Github");
+
+    // Create the command
+    var command = ''
+
+    // Remove the folder if any
+    command += 'rm -r /' + repositoryName + '; ';
+
+    // Clone the git repository
+    command += 'git clone https://github.com/nicolasances/' + repositoryName + '.git /' + repositoryName + '; ';
 
     exec(command, function(err, stdout, stderr) {
 
