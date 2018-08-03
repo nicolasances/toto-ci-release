@@ -19,8 +19,12 @@ exports.do = function(data) {
       // 2. Create the configuration file
       createConfig.do(data).then(function() {
 
+        console.log('asd');
+
         // 3. Build docker image
         buildDockerImage.do(data).then(function() {
+
+          console.log('asd2');
 
           // 4. Push docker image to dockerhub
           pushDockerImage.do(data).then(function() {
