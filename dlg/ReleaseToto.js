@@ -11,7 +11,6 @@ exports.do = function(data) {
   return new Promise(function(success, failure) {
 
     console.log("Starting release of Toto Webapp...");
-    console.log("Payload: " + JSON.stringify(data));
 
     // 1. Retrieve microservice from GitHub
     downloadCode.do(data).then((data) => {
