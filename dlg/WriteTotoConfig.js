@@ -19,7 +19,7 @@ exports.do = function(data) {
     file += 'var microservicesPort = "' + port + '"; \r\n';
     file += 'var microservicesUrl = "' + host + '/apis"; \r\n';
     file += 'var microservicesUrl2 = "' + host + '/apis"; \r\n';
-    file += 'var apiBasicAuthToken = "' + btoa(data.apiAuth.user + ":" + data.apiAuth.pwd) + '"';
+    file += 'var apiBasicAuthToken = "' + new Buffer(data.apiAuth.user + ':' + data.apiAuth.pwd).toString('base64') + '"';
 
     // Write
     fs.writeFile('/' + data.microservice + '/toto/conf/config.js', file, function(err, res) {
