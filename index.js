@@ -30,11 +30,10 @@ app.post('/releases', function(req, res) {
 
 app.get('/releases/:microserviceId', function(req, res) {
 
-  postRelease.getStatus(req.params.microserviceId).then((result) => {
+  var result = postRelease.getStatus(req.params.microserviceId);
 
-    res.status(200).send(result);
+  res.status(200).send(result);
 
-  }, (err) => {res.status(500).send(err);})
 });
 
 app.listen(8080, function() {
