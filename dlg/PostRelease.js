@@ -13,15 +13,17 @@ exports.do = function(conf) {
 
     // 1. Validate input
     // Must contain host
-    if (conf.host == null) {failure({error: 'No <host> parameter passed in the body'}); return;}
+    if (conf.microservice == 'toto' && conf.host == null) {failure({error: 'No <host> parameter passed in the body. This is mandatory to release the "toto" webapp'}); return;}
     // Must contain microservice
     if (conf.microservice == null) {failure({error: 'No <microservice> parameter passed in the body'}); return;}
-    // Must contain Dockerhub credentials
-    if (conf.dockerhubUser == null || conf.dockerhubPwd == null) {failure({error: 'No dockerhubUser and dockerhubPwd passed!'}); return;}
+
+    // 2. Setting Dockerhub credentials
+    conf.dockerhubUser = process.env.DOCKERHUBUSR;
+    conf.dockerhubPwd = process.env.DOCKERHUBPWD;
 
     console.log('Starting release process for Microservice ' + conf.microservice);
 
-    // 2. Check what type of microservice it is
+    // 3. Check what type of microservice it is
     // If it's the toto webapp (toto)
     if (conf.microservice == 'toto') {releaseToto.do(conf).then(function() {success();}, failure);}
 
