@@ -30,7 +30,7 @@ app.post('/releases', function(req, res) {
 
 app.get('/releases/:microserviceId', function(req, res) {
 
-  postRelease.getStatus(req.path.microserviceId).then((result) => {
+  postRelease.getStatus(req.params.microserviceId).then((result) => {
 
     res.status(200).send(result);
 
