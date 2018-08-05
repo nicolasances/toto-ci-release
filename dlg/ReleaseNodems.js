@@ -63,8 +63,6 @@ exports.do = function(data) {
 
 exports.getStatus = function(microservice) {
 
-  console.log(ongoingReleases);
-
   return new Promise(function(success, failure) {
 
     success(ongoingReleases.get(microservice));
