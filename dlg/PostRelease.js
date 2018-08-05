@@ -45,3 +45,9 @@ exports.do = function(conf) {
   });
 
 }
+
+exports.getStatus = function(microservice) {
+
+  if (microservice.startsWith('toto-nodems-')) return releaseNodems.getStatus(microservice);
+  else return {status: 'RELEASED'};
+}
