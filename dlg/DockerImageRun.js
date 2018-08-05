@@ -11,6 +11,7 @@ exports.do = function(data) {
     // Remove the microservice if it exists
     command += 'docker stop ' + data.microservice + ' || true; ';
     command += 'docker rm ' + data.microservice + ' || true; ';
+    command += 'docker rmi nicolasances/' + data.microservice + ' || true; ';
 
     // Define additional parameters in case of specific microservices
     // TODO

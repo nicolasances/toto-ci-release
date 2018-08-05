@@ -1,5 +1,7 @@
 
 var releaseToto = require('./ReleaseToto');
+var releaseNodems = require('./ReleaseNodems');
+var releaseMs = require('./ReleaseMs');
 
 // Requires a payload object
 // { microservice: <name of the microservice, e.g. toto-nodems-expenses or toto>
@@ -24,16 +26,16 @@ exports.do = function(conf) {
     if (conf.microservice == 'toto') {releaseToto.do(conf).then(function() {success();}, failure);}
 
     // TODO: if it's a web application (generic toto-ui-)
-    else if (conf.microservice.startsWith('toto-ui-')) {failure({error: 'Not implemented'});}
+    else if (conf.microservice.startsWith('toto-ui-')) {failure({error: 'Not yet implemented'});}
 
     // If it's a NodeJS microservice (toto-nodems-)
-    else if (conf.microservice.startsWith('toto-nodems-')) {failure({error: 'Not implemented'});}
+    else if (conf.microservice.startsWith('toto-nodems-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
 
     // If it's a Java microservice (toto-ms-)
-    else if (conf.microservice.startsWith('toto-ms-')) {failure({error: 'Not implemented'});}
+    else if (conf.microservice.startsWith('toto-ms-')) {releaseMs.do(conf).then(function() {success();}, failure);}
 
     // If it's a CI microservice (toto-ci)
-    else if (conf.microservice.startsWith('toto-ci-')) {failure({error: 'Not implemented'});}
+    else if (conf.microservice.startsWith('toto-ci-')) {failure({error: 'Not supposed to be released like this! Should be part of the Environment Setup init.sh'});}
 
     // If it's an unknown Microservice
     else {failure({error: 'Can\'t release this Microservice: unknown type: ' + conf.microservice});}
