@@ -9,23 +9,11 @@ exports.do = function(data) {
 
   return new Promise(function(success, failure) {
 
-    // 1. Retrieve microservice from GitHub
-    downloadCode.do(data).then((data) => {
+    // For Java microservices, I'm not gonna compile and stuff... just get the dockerhub image..
+    // Java microservices are not supported anymore.. too heavy
 
-      // 2. Build docker image
-      return buildDockerImage.do(data, true);
-
-    }).then(() => {
-
-      // 3. Push docker image to dockerhub
-      return pushDockerImage.do(data);
-
-    }).then(() => {
-
-      // 4. Run docker image
-      return runDockerImage.do(data);
-
-    }).then(() => {
+    // 1. Run docker image
+    runDockerImage.do(data).then(() => {
 
       success({microservice: data.microservice, deployed: true});
 
