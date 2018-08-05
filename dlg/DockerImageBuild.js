@@ -14,7 +14,10 @@ exports.do = function(data, nested) {
     // Is the microservice folder structure normal or nested?
     if (nested) dockerFileFolder += '/' + data.microservice;
 
-    var command = 'docker build -t nicolasances/' + data.microservice + ' ' + dockerFileFolder;
+    var command = '';
+
+    command += 'docker rmi nicolasances/' + data.microservice + ' || true; ';
+    command += 'docker build -t nicolasances/' + data.microservice + ' ' + dockerFileFolder;
 
     exec(command, function(err) {
 
