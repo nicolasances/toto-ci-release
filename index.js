@@ -34,7 +34,7 @@ app.get('/releases/:microserviceId', function(req, res) {
 
     res.status(200).send(result);
 
-  }, (err) => {res.status(500).send(err)};)
+  }, (err) => {res.status(500).send(err);})
 });
 
 app.listen(8080, function() {
