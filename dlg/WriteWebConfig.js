@@ -18,7 +18,7 @@ exports.do = function(data) {
     file += 'var apiBasicAuthToken = "' + new Buffer(data.apiAuth.user + ':' + data.apiAuth.pwd).toString('base64') + '"';
 
     // Write
-    fs.writeFile('/' + data.microservice + '/www/conf/config.js', file, function(err, res) {
+    fs.writeFile('/' + data.microservice + '/www/conf/conf.js', file, function(err, res) {
 
       if (err) {
         console.log('[' + data.microservice + '] - Error creating the config.js file!');
