@@ -15,7 +15,7 @@ exports.do = function(data) {
     var file = '';
 
     file += 'var apiUrl = "' + protocol + '://' + host + ':' + port + '/apis"; \r\n';
-    file += 'var apiBasicAuthToken = "' + new Buffer(data.apiAuth.user + ':' + data.apiAuth.pwd).toString('base64') + '"';
+    file += 'var apiBasicAuthToken = "' + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64') + '"';
 
     // Write
     fs.writeFile('/' + data.microservice + '/www/conf/conf.js', file, function(err, res) {
