@@ -11,6 +11,10 @@ exports.do = function(data) {
     // Define additional parameters in case of specific microservices
     // TODO
 
+    // Remove the microservice if it exists
+    command += 'docker stop ' + data.microservice + ' || true; ';
+    command += 'docker rm ' + data.microservice + ' || true; ';
+
     // Run the microservice
     command += 'docker run -d --network totonet --name ' + data.microservice + ' --restart always nicolasances/' + data.microservice + ':latest';
 
