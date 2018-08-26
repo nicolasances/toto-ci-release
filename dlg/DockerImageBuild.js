@@ -16,6 +16,11 @@ exports.do = function(data, nested) {
 
     var command = '';
 
+    // Remove the microservice if it exists
+    command += 'docker stop ' + data.microservice + ' || true; ';
+    command += 'docker rm ' + data.microservice + ' || true; ';
+
+    // Remove the image and build it
     command += 'docker rmi nicolasances/' + data.microservice + ' || true; ';
     command += 'docker build -t nicolasances/' + data.microservice + ' ' + dockerFileFolder;
 
