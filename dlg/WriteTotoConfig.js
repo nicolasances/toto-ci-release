@@ -7,9 +7,9 @@ exports.do = function(data) {
     // 1. Retrieve microservice from GitHub
     console.log('[' + data.microservice + '] - Creating config.js file...');
 
-    var protocol = data.ssl ? 'https' : 'http';
-    var port = data.ssl ? '443' : '80';
-    var host = data.host;
+    var protocol = process.env.SERVERSSL == 'true' ? 'https' : 'http';
+    var port = process.env.SERVERSSL == 'true' ? '443' : '80';
+    var host = process.env.SERVERHOST;
 
     // 2. Create the configuration file
     var file = '';

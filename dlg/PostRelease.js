@@ -13,8 +13,6 @@ exports.do = function(conf) {
   return new Promise(function(success, failure) {
 
     // 1. Validate input
-    // Must contain host
-    if (conf.microservice == 'toto' && conf.host == null) {failure({error: 'No <host> parameter passed in the body. This is mandatory to release the "toto" webapp'}); return;}
     // Must contain microservice
     if (conf.microservice == null) {failure({error: 'No <microservice> parameter passed in the body'}); return;}
 
