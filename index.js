@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 
 var postRelease = require('./dlg/PostRelease');
 
-var apiName = 'ci-release';
+var apiName = 'release';
 
 var app = express();
 
