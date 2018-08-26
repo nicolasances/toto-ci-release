@@ -40,7 +40,7 @@ exports.do = function(data) {
       ongoingWebappReleases.set(data.microservice, {microservice: data.microservice, status: statusDockerBuild});
 
       // 3. Build docker image
-      return buildDockerImage.do(data, true);
+      return buildDockerImage.do(data, false);
 
     }).then(() => {
 
