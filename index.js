@@ -22,12 +22,20 @@ app.use(express.static('/app'));
  */
 app.get('/', function(req, res) {res.send({api: apiName, status: 'running'});});
 
+/**
+ * Release a microservice
+ */
 app.post('/releases', function(req, res) {
 
-  postRelease.do(req.body).then(function(result) {res.status(200).send(result);}, function(result) {res.status(500).send(result)});
+  postRelease.do(req.body);
+
+  res.status(201).send();
 
 });
 
+/**
+ * Check the status of the release of a microservice
+ */
 app.get('/releases/:microserviceId', function(req, res) {
 
   postRelease.getStatus(req.params.microserviceId).then((result) => {
