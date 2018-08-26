@@ -2,6 +2,7 @@
 var releaseToto = require('./ReleaseToto');
 var releaseNodems = require('./ReleaseNodems');
 var releaseMs = require('./ReleaseMs');
+var releaseWebapp = require('./ReleaseWebapp');
 
 // Requires a payload object
 // { microservice: <name of the microservice, e.g. toto-nodems-expenses or toto>
@@ -27,8 +28,8 @@ exports.do = function(conf) {
     // If it's the toto webapp (toto)
     if (conf.microservice == 'toto') {releaseToto.do(conf).then(function() {success();}, failure);}
 
-    // TODO: if it's a web application (generic toto-ui-)
-    else if (conf.microservice.startsWith('toto-ui-')) {failure({error: 'Not yet implemented'});}
+    // If it's a web application (generic toto-web-)
+    else if (conf.microservice.startsWith('toto-web-')) {releaseWebapp.do(conf).then(success, failure);}
 
     // If it's a NodeJS microservice (toto-nodems-)
     else if (conf.microservice.startsWith('toto-nodems-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
@@ -49,5 +50,6 @@ exports.do = function(conf) {
 exports.getStatus = function(microservice) {
 
   if (microservice.startsWith('toto-nodems-')) return releaseNodems.getStatus(microservice);
+  else if (microservice.startsWith('toto-web-')) return releaseWebapp.getStatus(microservice);
   else return new Promise(function(s, f) {s({microservice: microservice, status: 'RELEASED'});});
 }

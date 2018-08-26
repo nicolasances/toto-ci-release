@@ -16,8 +16,6 @@ var statusDone = 'RELEASED';
 
 exports.do = function(data) {
 
-  console.log(ongoingReleases);
-
   // Push this release in the list of ongoing releases
   ongoingReleases.set(data.microservice, {
     microservice: data.microservice,
