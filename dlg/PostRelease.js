@@ -23,7 +23,7 @@ exports.do = function(conf) {
 
     // 3. Check what type of microservice it is
     // If it's a web application (generic toto-web-)
-    else if (conf.microservice.startsWith('toto-web-')) {releaseWebapp.do(conf).then(success, failure);}
+    if (conf.microservice.startsWith('toto-web-')) {releaseWebapp.do(conf).then(success, failure);}
 
     // If it's a NodeJS microservice (toto-nodems-)
     else if (conf.microservice.startsWith('toto-nodems-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
