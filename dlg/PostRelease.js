@@ -19,11 +19,11 @@ exports.do = function(conf) {
     conf.dockerhubUser = process.env.DOCKERHUBUSR;
     conf.dockerhubPwd = process.env.DOCKERHUBPWD;
 
-    console.log('Starting release process for Microservice ' + conf.microservice);
+    console.log('[' + conf.microservice + '] - Starting release process for Microservice ' + conf.microservice);
 
     // 3. Check what type of microservice it is
     // If it's a web application (generic toto-web-)
-    if (conf.microservice.startsWith('toto-web-')) {releaseWebapp.do(conf).then(success, failure);}
+    if (conf.microservice.startsWith('toto-web-') || conf.microservice == 'toto') {releaseWebapp.do(conf).then(success, failure);}
 
     // If it's a NodeJS microservice (toto-nodems-)
     else if (conf.microservice.startsWith('toto-nodems-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
