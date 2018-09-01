@@ -2,6 +2,7 @@ var exec = require('child_process').exec;
 
 var downloadCode = require('./DownloadMSCode');
 var createConfig = require('./WriteWebConfig');
+var createTotoConfig = require('./WriteTotoConfig');
 var buildDockerImage = require('./DockerImageBuild');
 var pushDockerImage = require('./DockerImagePush');
 var runDockerImage = require('./DockerImageRun');
@@ -33,14 +34,14 @@ exports.do = function(data) {
       ongoingWebappReleases.set(data.microservice, {microservice: data.microservice, status: statusConfig});
 
       // 2. Create the configuration file
-      return createConfig.do(data);
+      return data.microservice == 'toto' ? createTotoConfig.do(data) : createConfig.do(data);
 
     }).then(() => {
 
       ongoingWebappReleases.set(data.microservice, {microservice: data.microservice, status: statusDockerBuild});
 
       // 3. Build docker image
-      return buildDockerImage.do(data, false);
+      return buildDockerImage.do(data, data.microservice == 'toto' ? true : false);
 
     }).then(() => {
 
