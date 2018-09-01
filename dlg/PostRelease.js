@@ -44,6 +44,6 @@ exports.do = function(conf) {
 exports.getStatus = function(microservice) {
 
   if (microservice.startsWith('toto-nodems-')) return releaseNodems.getStatus(microservice);
-  else if (microservice.startsWith('toto-web-')) return releaseWebapp.getStatus(microservice);
+  else if (microservice.startsWith('toto-web-') || microservice == 'toto') return releaseWebapp.getStatus(microservice);
   else return new Promise(function(s, f) {s({microservice: microservice, status: 'RELEASED'});});
 }
