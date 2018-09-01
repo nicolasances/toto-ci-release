@@ -1,5 +1,4 @@
 
-var releaseToto = require('./ReleaseToto');
 var releaseNodems = require('./ReleaseNodems');
 var releaseMs = require('./ReleaseMs');
 var releaseWebapp = require('./ReleaseWebapp');
@@ -23,9 +22,6 @@ exports.do = function(conf) {
     console.log('Starting release process for Microservice ' + conf.microservice);
 
     // 3. Check what type of microservice it is
-    // If it's the toto webapp (toto)
-    if (conf.microservice == 'toto') {releaseToto.do(conf).then(function() {success();}, failure);}
-
     // If it's a web application (generic toto-web-)
     else if (conf.microservice.startsWith('toto-web-')) {releaseWebapp.do(conf).then(success, failure);}
 
