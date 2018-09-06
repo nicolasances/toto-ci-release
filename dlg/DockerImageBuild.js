@@ -24,13 +24,31 @@ exports.do = function(data, nested) {
     command += 'docker rmi nicolasances/' + data.microservice + ' || true; ';
     command += 'docker build -t nicolasances/' + data.microservice + ' ' + dockerFileFolder;
 
+    var justBuild = function() {
+
+      var cmd = 'docker build -t nicolasances/' + data.microservice + ' ' + dockerFileFolder;
+
+      exec(command, function(err) {
+
+        if (err) {
+          console.log("[" + data.microservice + "] - Error building Docker image! ");
+          console.log(err);
+          failure();
+          return;
+        }
+
+        success();
+
+      });
+    }
+
     exec(command, function(err) {
 
       if (err) {
-        console.log("[" + data.microservice + "] - Error building Docker image! ");
-        console.log(err);
-        failure();
-        return;
+        if (err.indexOf('No such container') >= 0) {
+          justBuild();
+          return;
+        }
       }
 
       console.log("[" + data.microservice + "] - Docker image successfully built! ");
