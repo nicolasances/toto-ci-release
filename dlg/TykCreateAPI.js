@@ -63,9 +63,12 @@ exports.do = function(api) {
       body: JSON.stringify(tykApi)
     };
 
-    console.log('[' + api.microservice + '] Creating Tyk API ' + api.name + " - " + api.microservice);
+    console.log('[' + api.microservice + '] - [TYK] - Creating Tyk API ' + api.name + " - " + api.microservice);
 
     http(data, function(error, response, body) {
+
+      if (error) console.log('[' + api.microservice + '] - [TYK] - API creation failed. Error: ' + error);
+      if (body) console.log('[' + api.microservice + '] - [TYK] - Body of response from Tyk: ' + body);
 
       success();
 
