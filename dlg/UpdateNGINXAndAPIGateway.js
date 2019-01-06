@@ -4,7 +4,7 @@ var setupNGINX = require('./SetupNGINX');
 
 exports.do = function(data) {
 
-  return new Promise(success, failure) {
+  return new Promise(function(success, failure) {
 
     // 1. Check if this is a new releaes
     // in case it is, release the new API on the CA API Gateway and reconfigure NGINX
@@ -30,6 +30,6 @@ exports.do = function(data) {
 
     })
 
-  }
+  });
 
 }
