@@ -1,10 +1,10 @@
 var http = require('request');
 
-exports.do = function(conf) {
+exports.do = function() {
 
   return new Promise(function(success, failure) {
 
-    console.log('[' + conf.microservice + '] - [TYK] - Tyk API Gateway : performing hot reload of the gateway...');
+    console.log("Tyk API Gateway : performing hot reload of the gateway...");
 
     // Prepare the gateway reload
     var data = {
@@ -18,7 +18,7 @@ exports.do = function(conf) {
 
     // Reload the gateway
     setTimeout(function() {
-
+      
       http(data, function(err, resp, body) {
 
         if (err) {
@@ -27,7 +27,7 @@ exports.do = function(conf) {
           return;
         }
 
-        console.log('[' + conf.microservice + '] - [TYK] - Tyk API Gateway : gateway reloaded!');
+        console.log("Tyk API Gateway : gateway reloaded!");
 
         success();
 

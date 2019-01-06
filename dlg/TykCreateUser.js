@@ -6,7 +6,7 @@ exports.do = function(conf) {
 
   return new Promise(function(success, error) {
 
-    console.log('[' + conf.microservice + '] - [TYK] - Updating API User with new microservice');
+    console.log("Tyk API Gateway : creating API User...");
 
     // Retrieve the APIs that user is going to have access to...
     getGithubApis.getApis().then(function(data) {
@@ -47,7 +47,7 @@ exports.do = function(conf) {
       // Create the user on Tyk
       var data = {
         url : "http://gateway:8080/tyk/keys/" + process.env.TOTOAPIUSER,
-        method: 'PUT',
+        method: 'POST',
         headers : {
           'User-Agent' : 'node.js',
           'x-tyk-authorization': 'totocazzo',
@@ -63,7 +63,7 @@ exports.do = function(conf) {
           return;
         }
 
-        console.log('[' + conf.microservice + '] - [TYK] - Tyk API Gateway : API user updated!');
+        console.log("Tyk API Gateway : API user created!");
 
         success();
 
