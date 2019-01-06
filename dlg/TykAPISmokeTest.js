@@ -8,7 +8,7 @@ exports.do = function(data) {
 
     // Create the http request to query the data
     var req = {
-      url: 'http://gateway:8080/' + data.microservice + '/',
+      url: 'http://gateway:8080/' + data.name + '/',
       method: 'GET',
       headers: {
         'Authorization': 'Basic ' + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64'),
@@ -17,7 +17,7 @@ exports.do = function(data) {
     }
 
     console.log('Smoke testing API ' + data.microservice);
-
+ga
     // Call the API and check the status
     http(req, function(err, resp, body) {
 
