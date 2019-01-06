@@ -6,6 +6,8 @@ exports.do = function(data) {
 
   return new Promise(function(success, failure) {
 
+    console.log('[' + conf.microservice + '] - Smoke testing API: http://gateway:8080/' + data.name + '/');
+
     // Create the http request to query the data
     var req = {
       url: 'http://gateway:8080/' + data.name + '/',
@@ -16,18 +18,17 @@ exports.do = function(data) {
       }
     }
 
-    console.log('Smoke testing API ' + data.microservice);
-
     // Call the API and check the status
     http(req, function(err, resp, body) {
 
       // If there's a problem
       if (err || resp.statusCode == 404 || body == null || JSON.parse(body).status != 'running') {
-        console.log('FAILED! Smoke test of API ' + data.microservice + ' on API Gateway failed.');
+        console.log('[' + conf.microservice + '] - Smoke test failed.');
+        if (resp.statusCode == 404) console.log('[' + conf.microservice + '] - Received 404');
         failure();
       }
       else {
-        console.log('Successfully smoke tested API ' + data.microservice + ' on API Gateway');
+        console.log('[' + conf.microservice + '] - Smoke test succeeded!');
         success();
       }
 
