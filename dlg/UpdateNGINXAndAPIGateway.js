@@ -1,4 +1,4 @@
-var smokeTestAPI = require('./TykAPISmokeTest');
+var smokeTestAPI = require('./APISmokeTest');
 var setupNGINX = require('./SetupNGINX');
 var setupAPIGateway = require('./SetupAPIGateway');
 
