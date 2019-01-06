@@ -1,6 +1,7 @@
 var smokeTestAPI = require('./TykAPISmokeTest');
 var tykCreateAPI = require('./TykCreateAPI');
 var tykUpdateUser = require('./TykUpdateUser');
+var tykReload = require('./TykReload');
 var setupNGINX = require('./SetupNGINX');
 
 exports.do = function(data) {
@@ -34,7 +35,10 @@ exports.do = function(data) {
 
         }).then(() => {
 
-          // 3. Add the new microservice to NGINX
+          // 3. Reload tyk
+          tykReload.do(data);
+
+          // 4. Add the new microservice to NGINX
           return setupNGINX.do(data);
 
         }).then(() => {
