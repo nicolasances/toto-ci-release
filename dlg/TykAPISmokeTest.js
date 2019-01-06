@@ -6,7 +6,7 @@ exports.do = function(data) {
 
   return new Promise(function(success, failure) {
 
-    console.log('[' + data.microservice + '] - Smoke testing API: http://gateway:8080/' + data.name + '/');
+    console.log('[' + data.microservice + '] - Smoke testing API: http://gateway:8080/' + data.name + '/ - Auth: Basic ' + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64') );
 
     // Create the http request to query the data
     var req = {
