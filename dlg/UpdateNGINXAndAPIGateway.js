@@ -6,6 +6,11 @@ exports.do = function(data) {
 
   return new Promise(function(success, failure) {
 
+    if (data.skipNGINXreconfig) {
+      success({nginxUpdated: false, tykUpdated: false});
+      return;
+    }
+
     // 1. Check if this is a new releaes
     // in case it is, release the new API on the CA API Gateway and reconfigure NGINX
     smokeTestAPI.do(data).then(() => {

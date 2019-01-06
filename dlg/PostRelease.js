@@ -4,9 +4,9 @@ var releaseMs = require('./ReleaseMs');
 var releaseWebapp = require('./ReleaseWebapp');
 
 // Requires a payload object
-// { microservice: <name of the microservice, e.g. toto-nodems-expenses or toto>
-//   host: <name of the host, can be an IP address, or a host name>
-//   ssl : <true or false> optional, defaulted to false}
+// {  microservice: <name of the microservice, e.g. toto-nodems-expenses or toto>
+//    skipNGINXreconfig: true or false. Default is false. Should be passed to true when the will is to avoid a reconfig of NGINX and creating the API on Tyk if found absent
+// }
 exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
