@@ -1,5 +1,6 @@
 var smokeTestAPI = require('./TykAPISmokeTest');
 var tykCreateAPI = require('./TykCreateAPI');
+var tykUpdateUser = require('./TykUpdateUser');
 var setupNGINX = require('./SetupNGINX');
 
 exports.do = function(data) {
@@ -27,6 +28,11 @@ exports.do = function(data) {
         // Failure
         // 2. Add the new microservice to the API Gateway
         tykCreateAPI.do(data).then(() => {
+
+          // 3. Update the Tyk user
+          return tykUpdateUser.do(data);
+
+        }).then(() => {
 
           // 3. Add the new microservice to NGINX
           return setupNGINX.do(data);
