@@ -30,6 +30,11 @@ exports.do = function(data) {
         // 2. Add the new microservice to the API Gateway
         tykCreateAPI.do(data).then(() => {
 
+          // 3. Reload tyk
+          tykReload.do(data);
+
+        }).then(() => {
+
           // 3. Update the Tyk user
           return tykUpdateUser.do(data);
 
