@@ -3,7 +3,7 @@ var fs = require('fs');
 
 // Create the NGINX conf file
 // To configure SSL the following parameters need to be passed: --- NO: they're taken from ENV variables
-exports.do = function() {
+exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 
@@ -27,7 +27,7 @@ exports.do = function() {
       // Create the SSL stuff
       if (process.env.SERVERSSL == 'true') {
 
-        console.log("NGINX : Configuration with SSL enabled");
+        console.log('[' + conf.microservice + '] NGINX : Configuration with SSL enabled');
 
         data += '\t\t listen 443 ssl; \r\n';
         data += '\t\t server_name ' + process.env.SERVERHOST + '; \r\n';
@@ -67,7 +67,7 @@ exports.do = function() {
           return;
         }
 
-        console.log("NGINX : nginx.conf file created!");
+        console.log('[' + conf.microservice + '] NGINX : nginx.conf file created!');
 
         success();
 

@@ -13,10 +13,10 @@ exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 
-    console.log("NGINX : Setting up...");
+    console.log('[' + conf.microservice + '] NGINX : Setting up...');
 
     // Clean environment
-    cleanNGINX.do().then(() => {
+    cleanNGINX.do(conf).then(() => {
 
       // Create the NGINX configuration file
       createConfFile.do(conf).then(function() {
@@ -33,7 +33,7 @@ exports.do = function(conf) {
               // Start NGINX
               startNGINX.do(conf).then(function() {
 
-                console.log("NGINX : setup complete!");
+                console.log('[' + conf.microservice + '] NGINX : setup complete!');
 
                 success();
 

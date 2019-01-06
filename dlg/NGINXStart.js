@@ -1,6 +1,6 @@
 var exec = require('child_process').exec;
 
-exports.do = function() {
+exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 
@@ -11,12 +11,12 @@ exports.do = function() {
     var certificateVolume = '';
     if (process.env.SERVERSSL == 'true') certificateVolume = '-v /etc/letsencrypt/archive/' + process.env.SERVERHOST + ':/certificates';
 
-    console.log('NGINX : Starting NGINX...');
+    console.log('[' + conf.microservice + '] NGINX : Starting NGINX...');
 
     // Start NGINX
     var startCmd = 'docker run -d ' + port + ' ' + certificateVolume + ' --network totonet --restart always --name toto-nginx toto-nginx'
 
-    console.log('NGINX : Command: ' + startCmd);
+    console.log('[' + conf.microservice + '] NGINX : Command: ' + startCmd);
 
     exec(startCmd, function(err, stdout, stderr) {
 

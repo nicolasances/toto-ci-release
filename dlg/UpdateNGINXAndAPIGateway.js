@@ -18,7 +18,10 @@ exports.do = function(data) {
       // Just return saying you did not update NGINX nor Tyk
       success({nginxUpdated: false, tykUpdated: false});
 
-    }, () => {
+    }, (e) => {
+
+      console.log('[' + conf.microservice + '] Failue in smoke test received' + e);
+
       // Failure
       // 2. Add the new microservice to the API Gateway
       tykCreateAPI.do(data).then(() => {

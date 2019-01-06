@@ -1,7 +1,7 @@
 var exec = require('child_process').exec;
 
 // Builds the docker image
-exports.do = function() {
+exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 
@@ -11,7 +11,7 @@ exports.do = function() {
     nginxBuild += 'cd /nginx-setup; ';
     nginxBuild += 'docker build -t toto-nginx . ;';
 
-    console.log("NGINX : Building docker image...");
+    console.log('[' + conf.microservice + '] NGINX : Building docker image...');
 
     // Build docker image
     exec(nginxBuild, function(err, stdout, stderr) {
@@ -21,7 +21,7 @@ exports.do = function() {
         return;
       }
 
-      console.log('NGINX : Docker image built!');
+      console.log('[' + conf.microservice + '] NGINX : Docker image built!');
 
       success();
 

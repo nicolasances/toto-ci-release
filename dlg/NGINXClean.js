@@ -1,11 +1,11 @@
 var exec = require('child_process').exec;
 
 // Cleans NGINX by removing the container and cleaning the images
-exports.do = function() {
+exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 
-    console.log('NGINX : Cleaning up ... removing Docker image..');
+    console.log('[' + conf.microservice + '] NGINX : Cleaning up ... removing Docker image..');
 
     var command = '';
 
@@ -24,7 +24,7 @@ exports.do = function() {
         return;
       }
 
-      console.log('NGINX : Docker image removed! Clean up complete!');
+      console.log('[' + conf.microservice + '] NGINX : Docker image removed! Clean up complete!');
 
       success();
 

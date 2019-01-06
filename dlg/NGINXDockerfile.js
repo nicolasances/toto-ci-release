@@ -2,7 +2,7 @@
 var fs = require('fs');
 
 // Create the NGINX Dockerfile
-exports.do = function() {
+exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 
@@ -22,7 +22,7 @@ exports.do = function() {
         return;
       }
 
-      console.log("NGINX : Dockerfile created!");
+      console.log('[' + conf.microservice + '] NGINX : Dockerfile created!');
 
       success();
 
