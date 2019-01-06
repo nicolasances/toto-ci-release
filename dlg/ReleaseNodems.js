@@ -4,6 +4,7 @@ var downloadCode = require('./DownloadMSCode');
 var buildDockerImage = require('./DockerImageBuild');
 var pushDockerImage = require('./DockerImagePush');
 var runDockerImage = require('./DockerImageRun');
+var updateNGINXAndAPIGateway = require('./UpdateNGINXAndAPIGateway');
 
 var ongoingReleases = new Map();
 
@@ -15,6 +16,9 @@ var statusDockerRun = 'DOCKER_RUN';
 var statusDone = 'RELEASED';
 
 exports.do = function(data) {
+
+  // Add the microservice name to data
+  data.name = data.microservice.substring('toto-nodems-'.length);
 
   // Push this release in the list of ongoing releases
   ongoingReleases.set(data.microservice, {
@@ -52,7 +56,12 @@ exports.do = function(data) {
 
       ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusDone});
 
-      success({microservice: data.microservice, deployed: true});
+      // 5. Check if a NGINX and API Gateway new release is needed (in case of new microservice)
+      return updateNGINXAndAPIGateway.do(data);
+
+    }).then((res) => {
+
+      success({microservice: data.microservice, deployed: true, updates: res});
 
     });
 
