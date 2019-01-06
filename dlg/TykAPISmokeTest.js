@@ -8,9 +8,14 @@ exports.do = function(data) {
 
     console.log('[' + data.microservice + '] - Smoke testing API: http://gateway:8080/' + data.name + '/' );
 
+    var protocol = process.env.SERVERSSL == true ? 'https' : 'http';
+    var host = process.env.SERVERHOST;
+
+    var url = protocol + '://' + host + '/apis/' + data.name + '/';
+
     // Create the http request to query the data
     var req = {
-      url: 'http://gateway:8080/' + data.name + '/',
+      url: url,
       method: 'GET',
       headers: {
         'Authorization': 'Basic ' + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64'),
