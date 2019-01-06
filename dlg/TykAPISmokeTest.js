@@ -29,7 +29,7 @@ exports.do = function(data) {
       // If there's a problem
       if (err || resp == null || resp.statusCode == 404 || body == null || JSON.parse(body).status != 'running') {
         console.log('[' + data.microservice + '] - Smoke test failed.');
-        if (resp.statusCode == 404) console.log('[' + data.microservice + '] - Received 404');
+        if (resp != null && resp.statusCode == 404) console.log('[' + data.microservice + '] - Received 404');
         else if (body == null) console.log('[' + data.microservice + '] - No body received');
         else console.log('[' + data.microservice + '] - Body: ' + body);
         failure();
