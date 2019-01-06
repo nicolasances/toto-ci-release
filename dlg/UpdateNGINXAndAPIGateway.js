@@ -20,7 +20,7 @@ exports.do = function(data) {
 
     }, (e) => {
 
-      console.log('[' + conf.microservice + '] Failue in smoke test received' + e);
+      console.log('[' + data.microservice + '] Failue in smoke test received' + e);
 
       // Failure
       // 2. Add the new microservice to the API Gateway
