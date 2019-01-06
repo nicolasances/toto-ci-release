@@ -63,7 +63,7 @@ exports.do = function(api) {
       body: JSON.stringify(tykApi)
     };
 
-    console.log('[' + conf.microservice + '] Creating Tyk API ' + api.name + " - " + api.microservice);
+    console.log('[' + api.microservice + '] Creating Tyk API ' + api.name + " - " + api.microservice);
 
     http(data, function(error, response, body) {
 
