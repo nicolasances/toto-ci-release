@@ -6,7 +6,7 @@ exports.do = function(data) {
 
   return new Promise(function(success, failure) {
 
-    console.log('[' + conf.microservice + '] - Smoke testing API: http://gateway:8080/' + data.name + '/');
+    console.log('[' + data.microservice + '] - Smoke testing API: http://gateway:8080/' + data.name + '/');
 
     // Create the http request to query the data
     var req = {
@@ -23,12 +23,12 @@ exports.do = function(data) {
 
       // If there's a problem
       if (err || resp.statusCode == 404 || body == null || JSON.parse(body).status != 'running') {
-        console.log('[' + conf.microservice + '] - Smoke test failed.');
-        if (resp.statusCode == 404) console.log('[' + conf.microservice + '] - Received 404');
+        console.log('[' + data.microservice + '] - Smoke test failed.');
+        if (resp.statusCode == 404) console.log('[' + data.microservice + '] - Received 404');
         failure();
       }
       else {
-        console.log('[' + conf.microservice + '] - Smoke test succeeded!');
+        console.log('[' + data.microservice + '] - Smoke test succeeded!');
         success();
       }
 
