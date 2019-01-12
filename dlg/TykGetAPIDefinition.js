@@ -1,4 +1,4 @@
-var setupAPIGateway = require('./SetupAPIGateway');
+var http = require('request');
 
 exports.do = function(data) {
 
