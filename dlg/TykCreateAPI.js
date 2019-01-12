@@ -75,7 +75,7 @@ exports.do = function(api) {
       // If the API was created, the body will contain a "key" field and a "status: ok"
       let tykResponse = JSON.parse(body);
 
-      if (tykResponse.key == data.api.localhost && tykResponse.status == 'ok') success({tykResponse});
+      if (tykResponse.key == api.localhost && tykResponse.status == 'ok') success({tykResponse});
       else failure({tykResponse});
 
     });
