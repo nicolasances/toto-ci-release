@@ -5,7 +5,7 @@ exports.do = function(data) {
   return new Promise(function(success, failure) {
 
       // Prepare the gateway reload
-      var data = {
+      var tykReq = {
         url : "http://gateway:8080/tyk/apis/" + data.name,
         method: 'GET',
         headers : {
@@ -15,7 +15,7 @@ exports.do = function(data) {
       };
 
       // Call API
-      http(data, function(err, resp, body) {
+      http(tykReq, function(err, resp, body) {
 
         // Parse body
         var apiStatus = JSON.parse(body);
