@@ -23,7 +23,7 @@ exports.do = function(apiUser, data) {
         'x-tyk-authorization': 'totocazzo',
         'Content-Type' : 'application/json'
       },
-      body: JSON.stringify(key)
+      body: JSON.stringify(apiUser)
     };
 
     http(tykRequest, function(error, response, body) {
