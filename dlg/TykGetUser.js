@@ -36,7 +36,7 @@ exports.do = function(conf) {
         let tykResponse = JSON.parse(body);
 
         if (tykResponse.status == 'error') failure(tykResponse);
-        else success();
+        else success(tykResponse);
 
       });
 
