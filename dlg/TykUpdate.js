@@ -1,6 +1,8 @@
 var tykGetAPIDefinition = require('./TykGetAPIDefinition');
 var tykCreateAPI = require('./TykCreateAPI');
 var tykReload = require('./TykReload');
+var tykGetUser = require('./TykGetUser');
+var tykUpdateUserPermissions = require('./TykUpdateUserPermissions');
 
 exports.do = function(data) {
 
@@ -25,6 +27,16 @@ exports.do = function(data) {
 
         // 3. Reload the gateway
         return tykReload.do(data);
+
+      }).then(() => {
+
+        // 4. Get the user and then update with the new permissions
+        return tykGetUser.do(data);
+
+      }).then((apiUser) => {
+
+        // 5. Update
+        return tykUpdateUserPermissions.do(apiUser, data);
 
       }).then(() => {
 
