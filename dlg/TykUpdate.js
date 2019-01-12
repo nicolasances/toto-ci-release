@@ -24,7 +24,7 @@ exports.do = function(data) {
       tykCreateAPI.do(data).then(() => {
 
         // 3. Reload the gateway
-        tykReload.do(data);
+        return tykReload.do(data);
 
       }).then(() => {
 
