@@ -4,7 +4,7 @@ var downloadCode = require('./DownloadMSCode');
 var buildDockerImage = require('./DockerImageBuild');
 var pushDockerImage = require('./DockerImagePush');
 var runDockerImage = require('./DockerImageRun');
-var updateNGINXAndAPIGateway = require('./UpdateNGINXAndAPIGateway');
+var updateTyk = require('./TykUpdate');
 
 var ongoingReleases = new Map();
 
@@ -13,6 +13,7 @@ var statusGitPull = 'GIT_PULL';
 var statusDockerBuild = 'DOCKER_BUILD';
 var statusDockerPush = 'DOCKER_PUSH';
 var statusDockerRun = 'DOCKER_RUN';
+var statusTykUpdate = 'TYK_UPDATE';
 var statusDone = 'RELEASED';
 
 exports.do = function(data) {
@@ -43,23 +44,23 @@ exports.do = function(data) {
       ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusDockerPush});
 
       // 3. Push docker image to dockerhub
-      return pushDockerImage.do(data);
+      pushDockerImage.do(data);
 
-    }).then(() => {
-
+      // 4. In parallel, run docker image
       ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusDockerRun});
 
-      // 4. Run docker image
       return runDockerImage.do(data);
 
     }).then(() => {
 
-      ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusDone});
+      ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusTykUpdate});
 
-      // 5. Check if a NGINX and API Gateway new release is needed (in case of new microservice)
-      return updateNGINXAndAPIGateway.do(data);
+      // 5. Check if the API is present on the API Gateway and if not release it
+      return updateTyk.do(data);
 
     }).then((res) => {
+
+      ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusDone});
 
       success({microservice: data.microservice, deployed: true, updates: res});
 

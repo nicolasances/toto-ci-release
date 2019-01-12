@@ -5,7 +5,6 @@ var releaseWebapp = require('./ReleaseWebapp');
 
 // Requires a payload object
 // {  microservice: <name of the microservice, e.g. toto-nodems-expenses or toto>
-//    skipNGINXreconfig: true or false. Default is false. Should be passed to true when the will is to avoid a reconfig of NGINX and creating the API on Tyk if found absent
 // }
 exports.do = function(conf) {
 
