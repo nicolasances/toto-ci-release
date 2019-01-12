@@ -1,4 +1,3 @@
-var setupAPIGateway = require('./SetupAPIGateway');
 var tykGetAPIDefinition = require('./TykGetAPIDefinition');
 var tykCreateAPI = require('./TykCreateAPI');
 var tykReload = require('./TykReload');
