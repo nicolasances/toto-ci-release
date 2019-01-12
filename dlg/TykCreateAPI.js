@@ -4,6 +4,10 @@ exports.do = function(api) {
 
   return new Promise(function(success, failure) {
 
+    // The listen path will be the name of the api with / instead of -
+    // This because tyk doesn't handle well the - and tends to append the api_id in some cases
+    var listenPath = api.name.replace('-', '/');
+
     // Build the JSON object to send to Tyk
     var tykApi = {
       "name": api.name,
@@ -43,7 +47,7 @@ exports.do = function(api) {
         "debug": false
       },
       "proxy": {
-        "listen_path": "/" + api.name + "/",
+        "listen_path": "/" + listenPath + "/",
         "target_url": "http://" + api.localhost + ":8080/",
         "strip_listen_path": true
       },
