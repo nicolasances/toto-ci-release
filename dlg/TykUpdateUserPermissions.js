@@ -14,6 +14,9 @@ exports.do = function(apiUser, data) {
       versions: ["Default"]
     }
 
+    // Update the user password
+    apiUser.basic_auth_data.password = process.env.TOTOAPIPSWD;
+
     // Update the user on Tyk (it's a POST, i know, but it works like that... PUT doesn't seem to work)
     var tykRequest = {
       url : "http://gateway:8080/tyk/keys/" + process.env.TOTOAPIUSER,
