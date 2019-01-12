@@ -7,7 +7,7 @@ exports.do = function(data) {
     console.log('[' + data.microservice + '] Tyk API Gateway : performing hot reload of the gateway...');
 
     // Prepare the gateway reload
-    var data = {
+    var tykRequest = {
       url : "http://gateway:8080/tyk/reload",
       method: 'GET',
       headers : {
@@ -17,7 +17,7 @@ exports.do = function(data) {
     };
 
     // Reload the gateway
-    http(data, function(err, resp, body) {
+    http(tykRequest, function(err, resp, body) {
 
       if (err) {
         console.log(err);

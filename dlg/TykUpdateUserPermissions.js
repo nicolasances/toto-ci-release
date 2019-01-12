@@ -15,7 +15,7 @@ exports.do = function(apiUser, data) {
     }
 
     // Update the user on Tyk (it's a POST, i know, but it works like that... PUT doesn't seem to work)
-    var data = {
+    var tykRequest = {
       url : "http://gateway:8080/tyk/keys/" + process.env.TOTOAPIUSER,
       method: 'POST',
       headers : {
@@ -26,7 +26,7 @@ exports.do = function(apiUser, data) {
       body: JSON.stringify(key)
     };
 
-    http(data, function(error, response, body) {
+    http(tykRequest, function(error, response, body) {
 
       if (error) {
         failure(error);
