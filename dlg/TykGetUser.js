@@ -22,7 +22,11 @@ exports.do = function(conf) {
         return;
       }
 
-      success(JSON.parse(body));
+      // Check if the user is there
+      let tykResponse = JSON.parse(body);
+
+      if (tykResponse.status == 'error') failure(tykResponse);
+      else success();
 
     });
 
