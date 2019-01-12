@@ -8,6 +8,8 @@ exports.do = function(conf) {
 
     getUserKey.do().then((key) => {
 
+      console.log('[' + data.microservice + '] Retrieved user key: ' + JSON.stringify(key));
+
       if (key == null || key.key == null) {
         failure();
         return;
