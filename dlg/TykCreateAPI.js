@@ -12,7 +12,7 @@ exports.do = function(api) {
     var tykApi = {
       "name": api.name,
       "slug": api.name,
-      "api_id": api.localhost,
+      "api_id": api.microservice,
       "org_id": "53ac07777cbb8c2d53000002",
       "use_keyless": false,
       "use_basic_auth": true,
@@ -48,7 +48,7 @@ exports.do = function(api) {
       },
       "proxy": {
         "listen_path": "/" + listenPath + "/",
-        "target_url": "http://" + api.localhost + ":8080/",
+        "target_url": "http://" + api.microservice + ":8080/",
         "strip_listen_path": true
       },
       "active": true,
@@ -67,7 +67,7 @@ exports.do = function(api) {
       body: JSON.stringify(tykApi)
     };
 
-    console.log('Creating Tyk API ' + api.name + " - " + api.localhost);
+    console.log('[' + api.microservice + '] Creating Tyk API ' + api.name + " - " + api.microservice);
 
     http(data, function(error, response, body) {
 
@@ -75,7 +75,7 @@ exports.do = function(api) {
       // If the API was created, the body will contain a "key" field and a "status: ok"
       let tykResponse = JSON.parse(body);
 
-      if (tykResponse.key == api.localhost && tykResponse.status == 'ok') success({tykResponse});
+      if (tykResponse.key == api.microservice && tykResponse.status == 'ok') success({tykResponse});
       else failure({tykResponse});
 
     });
