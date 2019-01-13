@@ -40,6 +40,10 @@ exports.do = function(data) {
 
       }).then(() => {
 
+        return tykReload.do(data);
+        
+      }).then(() => {
+
         success({tykUpdated: true});
 
       });
