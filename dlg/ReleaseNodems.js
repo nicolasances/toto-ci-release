@@ -90,6 +90,7 @@ var releaseNoDocker = function(data) {
 
     });
 
+  });
 }
 
 /**
