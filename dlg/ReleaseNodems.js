@@ -29,7 +29,7 @@ exports.do = function(data) {
   });
 
   // Check if docker release has to be SKIPPED
-  if (data.skipDockerRelease) return releaseNoDocker(data);
+  if (data.skipDockerRelease) releaseNoDocker(data).then(success, failure);
 
   return new Promise(function(success, failure) {
 
