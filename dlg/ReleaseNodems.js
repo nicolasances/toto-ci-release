@@ -82,11 +82,11 @@ var releaseNoDocker = function(data) {
     ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusTykUpdate});
 
     // 1. Retrieve microservice from GitHub
-    updateTyk.do(data).then((data) => {
+    updateTyk.do(data).then(() => {
 
       ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusDone});
 
-      success({microservice: data.microservice, deployed: true, updates: res});
+      success({microservice: data.microservice, deployed: true});
 
     });
 
