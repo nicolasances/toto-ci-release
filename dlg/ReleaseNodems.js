@@ -44,7 +44,7 @@ exports.do = function(data) {
       ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusDockerPush});
 
       // 3. Push docker image to dockerhub
-      pushDockerImage.do(data);
+      // pushDockerImage.do(data);
 
       // 4. In parallel, run docker image
       ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusDockerRun});
