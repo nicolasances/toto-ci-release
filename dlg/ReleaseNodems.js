@@ -28,10 +28,10 @@ exports.do = function(data) {
     status: statusStarting
   });
 
-  // Check if docker release has to be SKIPPED
-  if (data.skipDockerRelease) releaseNoDocker(data).then(success, failure);
-
   return new Promise(function(success, failure) {
+
+    // Check if docker release has to be SKIPPED
+    if (data.skipDockerRelease) {releaseNoDocker(data).then(success, failure); return;}
 
     ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusGitPull});
 
