@@ -19,7 +19,8 @@ var statusDone = 'RELEASED';
 exports.do = function(data) {
 
   // Add the microservice name to data
-  data.name = data.microservice.substring('toto-nodems-'.length);
+  if (data.microservice.startsWith('toto-nodems-')) data.name = data.microservice.substring('toto-nodems-'.length);
+  if (data.microservice.startsWith('toto-ci-')) data.name = data.microservice.substring('toto-ci-'.length);
 
   // Push this release in the list of ongoing releases
   ongoingReleases.set(data.microservice, {
