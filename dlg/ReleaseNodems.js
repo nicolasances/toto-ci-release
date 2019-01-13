@@ -73,7 +73,11 @@ exports.getStatus = function(microservice) {
 
   return new Promise(function(success, failure) {
 
-    success(ongoingReleases.get(microservice));
+    let status = ongoingReleases.get(microservice);
+
+    // In case the request arrives before the microservice has even been started, return STARTING status
+    if (status == null) success({microservice: microservice, status: statusStarting});
+    else success(status);
 
   });
 
