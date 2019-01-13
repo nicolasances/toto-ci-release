@@ -27,6 +27,9 @@ exports.do = function(data) {
     status: statusStarting
   });
 
+  // Check if docker release has to be SKIPPED
+  if (data.skipDockerRelease) return releaseNoDocker(data);
+
   return new Promise(function(success, failure) {
 
     ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusGitPull});
@@ -69,6 +72,30 @@ exports.do = function(data) {
   });
 }
 
+/**
+ * Release the microservice, but NOT on docker, only on Tyk
+ */
+var releaseNoDocker = function(data) {
+
+  return new Promise(function(success, failure) {
+
+    ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusTykUpdate});
+
+    // 1. Retrieve microservice from GitHub
+    updateTyk.do(data).then((data) => {
+
+      ongoingReleases.set(data.microservice, {microservice: data.microservice, status: statusDone});
+
+      success({microservice: data.microservice, deployed: true, updates: res});
+
+    });
+
+}
+
+/**
+ * Retrieves the status of the release
+ * This function is called in a polling fashion
+ */
 exports.getStatus = function(microservice) {
 
   return new Promise(function(success, failure) {

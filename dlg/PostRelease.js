@@ -31,7 +31,7 @@ exports.do = function(conf) {
     else if (conf.microservice.startsWith('toto-ms-')) {releaseMs.do(conf).then(function() {success();}, failure);}
 
     // If it's a CI microservice (toto-ci)
-    else if (conf.microservice.startsWith('toto-ci-')) {failure({error: 'Not supposed to be released like this! Should be part of the Environment Setup init.sh'});}
+    else if (conf.microservice.startsWith('toto-ci-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
 
     // If it's an unknown Microservice
     else {failure({error: 'Can\'t release this Microservice: unknown type: ' + conf.microservice});}
