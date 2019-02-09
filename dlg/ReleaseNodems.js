@@ -21,6 +21,7 @@ exports.do = function(data) {
   // Add the microservice name to data
   if (data.microservice.startsWith('toto-nodems-')) data.name = data.microservice.substring('toto-nodems-'.length);
   if (data.microservice.startsWith('toto-ci-')) data.name = data.microservice.substring('toto-ci-'.length);
+  if (data.microservice.startsWith('toto-nodereact-')) data.name = 'react-' + data.microservice.substring('toto-nodereact-'.length);
 
   // Push this release in the list of ongoing releases
   ongoingReleases.set(data.microservice, {

@@ -27,6 +27,9 @@ exports.do = function(conf) {
     // If it's a NodeJS microservice (toto-nodems-)
     else if (conf.microservice.startsWith('toto-nodems-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
 
+    // If it's a NodeJS reactive microservice (toto-nodereact-)
+    else if (conf.microservice.startsWith('toto-nodereact-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
+
     // If it's a Java microservice (toto-ms-)
     else if (conf.microservice.startsWith('toto-ms-')) {releaseMs.do(conf).then(function() {success();}, failure);}
 
