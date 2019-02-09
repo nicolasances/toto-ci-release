@@ -6,7 +6,7 @@ exports.do = function(api) {
 
     // The listen path will be the name of the api with / instead of -
     // This because tyk doesn't handle well the - and tends to append the api_id in some cases
-    var listenPath = api.name.replace('-', '/');
+    var listenPath = api.name.replace(/-/g, '/');
 
     // Build the JSON object to send to Tyk
     var tykApi = {
