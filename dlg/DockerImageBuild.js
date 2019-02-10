@@ -45,11 +45,8 @@ exports.do = function(data, nested) {
     exec(command, function(err) {
 
       if (err) {
-        console.log(err);
-        if (err.indexOf('No such container') >= 0) {
-          justBuild();
-          return;
-        }
+        justBuild();
+        return;
       }
 
       console.log("[" + data.microservice + "] - Docker image successfully built! ");
