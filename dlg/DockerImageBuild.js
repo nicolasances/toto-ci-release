@@ -44,6 +44,8 @@ exports.do = function(data, nested) {
 
     exec(command, function(err) {
 
+      // In case of error, it could just be a "No such container error", in that case: try to just build
+      // This might happen when releasing new microservices
       if (err) {
         justBuild();
         return;
