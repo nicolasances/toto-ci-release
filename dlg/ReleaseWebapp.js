@@ -38,7 +38,7 @@ exports.do = function(data) {
       // If it's the old toto webapp, create the old configuration file
       if (data.microservice == 'toto') return createTotoConfig.do(data);
       // If it's an Angular2+ app
-      else if (isAngular2Webapp.do(data.microservice)) return createAngular2Config.do(data);
+      else if (isAngular2Webapp.do(data)) return createAngular2Config.do(data);
       // Otherwise it's an AngularJS app
       else return createConfig.do(data);
 
