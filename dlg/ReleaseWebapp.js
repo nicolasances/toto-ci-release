@@ -3,6 +3,7 @@ var exec = require('child_process').exec;
 var downloadCode = require('./DownloadMSCode');
 var createConfig = require('./WriteWebConfig');
 var createTotoConfig = require('./WriteTotoConfig');
+var createAngular2Config = require('./WriteAngular2Config');
 var buildDockerImage = require('./DockerImageBuild');
 var pushDockerImage = require('./DockerImagePush');
 var runDockerImage = require('./DockerImageRun');
