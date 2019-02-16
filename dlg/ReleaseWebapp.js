@@ -6,6 +6,7 @@ var createTotoConfig = require('./WriteTotoConfig');
 var buildDockerImage = require('./DockerImageBuild');
 var pushDockerImage = require('./DockerImagePush');
 var runDockerImage = require('./DockerImageRun');
+var isAngular2Webapp = require('./IsAngular2Webapp');
 
 var ongoingWebappReleases = new Map();
 
@@ -34,7 +35,12 @@ exports.do = function(data) {
       ongoingWebappReleases.set(data.microservice, {microservice: data.microservice, status: statusConfig});
 
       // 2. Create the configuration file
-      return data.microservice == 'toto' ? createTotoConfig.do(data) : createConfig.do(data);
+      // If it's the old toto webapp, create the old configuration file
+      if (data.microservice == 'toto') return createTotoConfig.do(data);
+      // If it's an Angular2+ app
+      else if (isAngular2Webapp.do(data.microservice)) return createAngular2Config.do(data);
+      // Otherwise it's an AngularJS app
+      else return createConfig.do(data);
 
     }).then(() => {
 
