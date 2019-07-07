@@ -4,10 +4,12 @@ var downloadCode = require('./DownloadMSCode');
 var createConfig = require('./WriteWebConfig');
 var createTotoConfig = require('./WriteTotoConfig');
 var createAngular2Config = require('./WriteAngular2Config');
+var createReactJSConfig = require('./WriteReactJSConfig');
 var buildDockerImage = require('./DockerImageBuild');
 var pushDockerImage = require('./DockerImagePush');
 var runDockerImage = require('./DockerImageRun');
 var isAngular2Webapp = require('./IsAngular2Webapp');
+var isReactJSWebapp = require('./IsReactJSWebapp');
 
 var ongoingWebappReleases = new Map();
 
@@ -40,6 +42,8 @@ exports.do = function(data) {
       if (data.microservice == 'toto') return createTotoConfig.do(data);
       // If it's an Angular2+ app
       else if (isAngular2Webapp.do(data)) return createAngular2Config.do(data);
+      // If it's a ReactJS app
+      else if (isReactJSWebapp.do(data)) return createReactJSConfig.do(data);
       // Otherwise it's an AngularJS app
       else return createConfig.do(data);
 
