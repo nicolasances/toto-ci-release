@@ -11,7 +11,7 @@ exports.do = function(data) {
     var port = process.env.SERVERSSL == 'true' ? '443' : '80';
     var host = process.env.SERVERHOST;
 
-    let apiUrl = protocol + '://' + host : ':' + port + '/apis';
+    let apiUrl = protocol + '://' + host + ':' + port + '/apis';
     let auth = 'Basic ' + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64');
 
     // 2. Create the configuration file
