@@ -4,7 +4,7 @@ exports.do = function(data) {
 
     console.log("[" + data.microservice + "] - Checking type of webapp");
 
-    let reactJS = fs.existsSync('/' + data.microservice + '/App.js');
+    let reactJS = fs.existsSync('/' + data.microservice + '/src/App.js');
 
     if (reactJS) {
 
