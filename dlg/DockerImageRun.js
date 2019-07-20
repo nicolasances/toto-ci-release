@@ -16,7 +16,7 @@ exports.do = function(data) {
     command += 'docker rm ' + data.microservice + ' || true; ';
 
     // Run the microservice
-    command += 'docker run -d --network totonet --name ' + data.microservice + ' --restart always nicolasances/' + data.microservice + ':latest';
+    command += 'docker run -d --network totonet --name ' + data.microservice + ' -v /keys:/keys -e GOOGLE_APPLICATION_CREDENTIALS=/keys/pubsub.json --restart always nicolasances/' + data.microservice + ':latest';
 
     exec(command, function(err) {
 
