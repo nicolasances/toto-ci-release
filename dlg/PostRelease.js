@@ -2,6 +2,7 @@
 var releaseNodems = require('./ReleaseNodems');
 var releaseMs = require('./ReleaseMs');
 var releaseWebapp = require('./ReleaseWebapp');
+var releasePyms = require('./ReleasePyms');
 
 // Requires a payload object
 // {  microservice: <name of the microservice, e.g. toto-nodems-expenses or toto>
@@ -29,6 +30,9 @@ exports.do = function(conf) {
 
     // If it's a NodeJS reactive microservice (toto-nodereact-)
     else if (conf.microservice.startsWith('toto-nodereact-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
+
+    // If it's a Python microservice
+    else if (conf.microservice.startsWith('toto-py-')) {releasePyms.do(conf).then(function() {success();}, failure);}
 
     // If it's a Java microservice (toto-ms-)
     else if (conf.microservice.startsWith('toto-ms-')) {releaseMs.do(conf).then(function() {success();}, failure);}
