@@ -27,8 +27,11 @@ exports.do = function(data) {
     // TOTO_HOST - Host
     totoHostEnvVar = process.env.SERVERHOST;
 
+    // TOTO_EVENTS_GCP_PROJECT_ID - Project ID for the Google Project that holds the pubsub broker
+    eventsGCPProjectEnvVar = 'toto-events-' + process.env.SERVERENV.toLowerCase();
+
     // Run command
-    command += 'docker run -d --network totonet --name ' + data.microservice + ' -v /keys:/keys -e TOTO_HOST=' + totoHostEnvVar + ' -e TOTO_API_AUTH=' + totoApiAuthEnvVar + ' -e GOOGLE_APPLICATION_CREDENTIALS=' + googleApplicationCredentials + ' --restart always nicolasances/' + data.microservice + ':latest';
+    command += 'docker run -d --network totonet --name ' + data.microservice + ' -v /keys:/keys -e TOTO_EVENTS_GCP_PROJECT_ID=' + eventsGCPProjectEnvVar + ' -e TOTO_HOST=' + totoHostEnvVar + ' -e TOTO_API_AUTH=' + totoApiAuthEnvVar + ' -e GOOGLE_APPLICATION_CREDENTIALS=' + googleApplicationCredentials + ' --restart always nicolasances/' + data.microservice + ':latest';
 
     exec(command, function(err) {
 
