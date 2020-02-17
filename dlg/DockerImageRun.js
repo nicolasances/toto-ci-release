@@ -15,8 +15,20 @@ exports.do = function(data) {
     command += 'docker stop ' + data.microservice + ' || true; ';
     command += 'docker rm ' + data.microservice + ' || true; ';
 
-    // Run the microservice
-    command += 'docker run -d --network totonet --name ' + data.microservice + ' -v /keys:/keys -e GOOGLE_APPLICATION_CREDENTIALS=/keys/pubsub.json --restart always nicolasances/' + data.microservice + ':latest';
+    // ENVIRONMENT VARIABLES
+    // Google Application Crendetials
+    // FIXME pubsub.json should disappear
+    if (data.microservice.startsWith('toto-py-')) googleApplicationCredentials = "/keys/toto-microservice-dev.json";
+    else googleApplicationCredentials = "/keys/pubsub.json";
+
+    // TOTO_API_AUTH - Authentication Env Var
+    totoApiAuthEnvVar = 'Basic ' +  + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64');
+
+    // TOTO_HOST - Host
+    totoHostEnvVar = process.env.SERVERHOST;
+
+    // Run command
+    command += 'docker run -d --network totonet --name ' + data.microservice + ' -v /keys:/keys -e TOTO_HOST=' + totoHostEnvVar + ' -e TOTO_API_AUTH=' + totoApiAuthEnvVar + ' -e GOOGLE_APPLICATION_CREDENTIALS=' + googleApplicationCredentials + ' --restart always nicolasances/' + data.microservice + ':latest';
 
     exec(command, function(err) {
 
