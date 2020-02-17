@@ -22,7 +22,7 @@ exports.do = function(data) {
     else googleApplicationCredentials = "/keys/pubsub.json";
 
     // TOTO_API_AUTH - Authentication Env Var
-    totoApiAuthEnvVar = 'Basic ' +  + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64');
+    totoApiAuthEnvVar = '"Basic ' + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64') + '"';
 
     // TOTO_HOST - Host
     totoHostEnvVar = process.env.SERVERHOST;
