@@ -27,9 +27,12 @@ exports.do = function(conf) {
 
     // If it's a NodeJS microservice (toto-nodems-)
     else if (conf.microservice.startsWith('toto-nodems-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
-
+    
     // If it's a NodeJS reactive microservice (toto-nodereact-)
     else if (conf.microservice.startsWith('toto-nodereact-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
+
+    // If it's a NodeJS microservice (toto-nodems-)
+    else if (conf.microservice.startsWith('toto-cron-')) {releaseNodems.do(conf).then(function() {success();}, failure);}
 
     // If it's totoml 
     else if (conf.microservice.startsWith('totoml-')) {releaseNodems.do(conf).then(function() {success();}, failure);}

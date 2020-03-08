@@ -23,6 +23,7 @@ exports.do = function(data) {
   if (data.microservice.startsWith('toto-ci-')) data.name = data.microservice.substring('toto-ci-'.length);
   if (data.microservice.startsWith('toto-nodereact-')) data.name = 'react-' + data.microservice.substring('toto-nodereact-'.length);
   if (data.microservice.startsWith('totoml-')) data.name = data.microservice;
+  if (data.microservice.startsWith('toto-cron-')) data.name = data.microservice.substring('toto-'.length);
 
   // Push this release in the list of ongoing releases
   ongoingReleases.set(data.microservice, {
