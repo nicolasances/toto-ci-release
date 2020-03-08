@@ -17,9 +17,7 @@ exports.do = function(data) {
 
     // ENVIRONMENT VARIABLES
     // Google Application Crendetials
-    // FIXME pubsub.json should disappear
-    if (data.microservice.startsWith('toto-py-')) googleApplicationCredentials = "/keys/toto-microservice-dev.json";
-    else googleApplicationCredentials = "/keys/pubsub.json";
+    googleApplicationCredentials = "/keys/toto-microservice-dev.json";
 
     // TOTO_API_AUTH - Authentication Env Var
     totoApiAuthEnvVar = '"Basic ' + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64') + '"';
