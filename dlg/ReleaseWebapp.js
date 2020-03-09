@@ -56,13 +56,6 @@ exports.do = function(data) {
 
     }).then(() => {
 
-      ongoingWebappReleases.set(data.microservice, {microservice: data.microservice, status: statusDockerPush});
-
-      // 4. Push docker image to dockerhub
-      return pushDockerImage.do(data);
-
-    }).then(() => {
-
       ongoingWebappReleases.set(data.microservice, {microservice: data.microservice, status: statusDockerRun});
 
       // 5. Run docker image
