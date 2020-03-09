@@ -17,7 +17,7 @@ exports.do = function(data) {
 
     // ENVIRONMENT VARIABLES
     // Google Application Crendetials
-    googleApplicationCredentials = "/keys/toto-microservice-dev.json";
+    googleApplicationCredentials = "/keys/toto-microservice-" + process.env.SERVERENV + ".json";
 
     // TOTO_API_AUTH - Authentication Env Var
     totoApiAuthEnvVar = '"Basic ' + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64') + '"';
