@@ -35,7 +35,7 @@ exports.do = function(data) {
     logRotation = ' --log-opt max-size=10m --log-opt max-file=5 ';
 
     // Run command
-    command += 'docker run -d --network totonet --name ' + data.microservice + ' -v /keys:/keys -e TOTO_ENV=' + envEnvVar + ' -e TOTO_EVENTS_GCP_PROJECT_ID=' + eventsGCPProjectEnvVar + ' -e TOTO_HOST=' + totoHostEnvVar + ' -e TOTO_API_AUTH=' + totoApiAuthEnvVar + ' -e GOOGLE_APPLICATION_CREDENTIALS=' + googleApplicationCredentials + logRotation + ' --restart always nicolasances/' + data.microservice + ':latest';
+    command += 'docker run -d --network totonet --name ' + data.microservice + ' --memory=300m -v /keys:/keys -e TOTO_ENV=' + envEnvVar + ' -e TOTO_EVENTS_GCP_PROJECT_ID=' + eventsGCPProjectEnvVar + ' -e TOTO_HOST=' + totoHostEnvVar + ' -e TOTO_API_AUTH=' + totoApiAuthEnvVar + ' -e GOOGLE_APPLICATION_CREDENTIALS=' + googleApplicationCredentials + logRotation + ' --restart always nicolasances/' + data.microservice + ':latest';
 
     exec(command, function(err) {
 
